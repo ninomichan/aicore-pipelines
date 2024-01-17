@@ -1,7 +1,7 @@
 apiVersion: ai.sap.com/v1alpha1
 kind: ServingTemplate
 metadata:
-  name: llm-test-service-517232 # executable ID, must be unique across your SAP AI Core instance, for example use `server-pipeline-yourname-1234`
+  name: llm-test-service-i517232 # executable ID, must be unique across your SAP AI Core instance, for example use `server-pipeline-yourname-1234`
   annotations:  
     scenarios.ai.sap.com/description: "llm test"
     scenarios.ai.sap.com/name: "llm test scenario" # Scenario name should be the use case
