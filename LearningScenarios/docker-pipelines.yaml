@@ -18,7 +18,7 @@ spec:
   imagePullSecrets:
     - name: credstutorialrepo-vicki # your docker registry secret
   templates:
-  - name: "serving.kserve.io/v1beta1"
+  - apiVersion: "serving.kserve.io/v1beta1"
     metadata:
       annotations: |
         autoscaling.knative.dev/metric: concurrency   # condition when to scale
