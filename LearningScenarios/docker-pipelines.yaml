@@ -4,25 +4,39 @@ metadata:
   name: code-pipeline-i517232 # executable id, must be unique across all your workflows (YAML files), please modify this to any value (e.g. code-pipeline-12345) if you are not the only user of your SAP AI Core instance.
   annotations:
     scenarios.ai.sap.com/description: "Tutorial to add custom code to SAP AI Core"
-    scenarios.ai.sap.com/name: "Code (Tutorial)"
-    executables.ai.sap.com/description: "Trains model on median house prices"
-    executables.ai.sap.com/name: "House Price (Sklearn Example)"
+    scenarios.ai.sap.com/name: "llm-code-test"
+    executables.ai.sap.com/description: LLM code"
+    executables.ai.sap.com/name: "llm-code-1"
+    artifacts.ai.sap.com/textmodel.kind: "model"
+    artifacts.ai.sap.com/textmodel.description: "artifact description"
+    artifacts.ai.sap.com/textmodel.labels: | 
+        {"ext.ai.sap.com/customkey1":"customvalue1", "ext.ai.sap.com/customkey2":"customvalue2"}
   labels:
-    scenarios.ai.sap.com/id: "learning-code"
+    scenarios.ai.sap.com/id: "llm-code"
     ai.sap.com/version: "1.0"
 spec:
   imagePullSecrets:
     - name: credstutorialrepo-vicki # your docker registry secret
-  entrypoint: mypipeline
   templates:
-  - name: mypipeline
-    steps:
-    - - name: mypredictor
-        template: mycodeblock1
-
-  - name: mycodeblock1
-    container:
-      image: docker.io/vickiwang/house-price:04 # Your docker image name
-      command: ["/bin/sh", "-c"]
-      args:
-        - "python /app/src/main.py"
+  - name: "serving.kserve.io/v1beta1"
+    metadata:
+      annotations: |
+        autoscaling.knative.dev/metric: concurrency   # condition when to scale
+        autoscaling.knative.dev/target: 1
+        autoscaling.knative.dev/targetBurstCapacity: 0
+      labels: |
+        ai.sap.com/resourcePlan: starter # computing power
+    spec: |
+      predictor:
+        minReplicas: 1
+        maxReplicas: 1    # how much to scale
+        containers:
+        - name: kserve-container
+          image: docker.io/vickiwang/house-price:04
+          ports:
+            - containerPort: 9001    # customizable port
+              protocol: TCP
+          command: ["/bin/sh", "-c"]
+          args:
+            - >
+              set -e && echo "Starting" && gunicorn --chdir /app/src main:app -b 0.0.0.0:9001 # filename `main` flask variable `app`
