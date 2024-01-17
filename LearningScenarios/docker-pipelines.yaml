@@ -1,23 +1,22 @@
 apiVersion: ai.sap.com/v1alpha1
 kind: ServingTemplate
 metadata:
-  name: llm-code-pipeline-i517232 # executable id, must be unique across all your workflows (YAML files), please modify this to any value (e.g. code-pipeline-12345) if you are not the only user of your SAP AI Core instance.
-  annotations:
-    scenarios.ai.sap.com/description: "Tutorial to add custom code to SAP AI Core"
-    scenarios.ai.sap.com/name: "llm-code-test"
-    executables.ai.sap.com/description: LLM code"
-    executables.ai.sap.com/name: "llm-code-1"
-    artifacts.ai.sap.com/textmodel.kind: "model"
-    artifacts.ai.sap.com/textmodel.description: "artifact description"
-    artifacts.ai.sap.com/textmodel.labels: | 
-        {"ext.ai.sap.com/customkey1":"customvalue1", "ext.ai.sap.com/customkey2":"customvalue2"}
+  name: llm-test-service-517232 # executable ID, must be unique across your SAP AI Core instance, for example use `server-pipeline-yourname-1234`
+  annotations:  
+    scenarios.ai.sap.com/description: "llm test"
+    scenarios.ai.sap.com/name: "llm test scenario" # Scenario name should be the use case
+    executables.ai.sap.com/description: "llm service Completions Proxy as Inference"
+    executables.ai.sap.com/name: "llm-test" # Executable name should describe the workflow in the use case
   labels:
-    scenarios.ai.sap.com/id: "llm-code"
+    scenarios.ai.sap.com/id: "llm-test-scenario"
     ai.sap.com/version: "1.0"
+    ext.ai.sap.com/islm_released_version: "true"
+    ext.ai.sap.com/islm_executable_type: "inference"
+    ext.ai.sap.com/islm_inference_type: "online"
 spec:
-  imagePullSecrets:
-    - name: credstutorialrepo-vicki # your docker registry secret
-  templates:
+  imagePullSecrets: # (optional if using a private docker hub repository)
+   - name: credstutorialrepo-vicki # your docker registry secret
+  template:
     apiVersion: "serving.kserve.io/v1beta1"
     metadata:
       annotations: |
@@ -32,7 +31,7 @@ spec:
         maxReplicas: 1    # how much to scale
         containers:
         - name: kserve-container
-          image: docker.io/vickiwang/house-price:04
+          image: docker.io/vickiwang/house-price:04 
           ports:
             - containerPort: 9001    # customizable port
               protocol: TCP
