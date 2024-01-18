@@ -39,3 +39,29 @@ spec:
           args:
             - >
               set -e && echo "Starting" && gunicorn --chdir /app/src main:app -b 0.0.0.0:9001 # filename `main` flask variable `app`
+          env:
+          - name: AICORE_LLM_AUTH_URL
+            valueFrom:
+              secretKeyRef:
+                name: aicore-llm
+                key: authurl
+          - name: AICORE_LLM_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: aicore-llm
+                key: clientid
+          - name: AICORE_LLM_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: aicore-llm
+                key: clientsecret
+          - name: AICORE_LLM_API_BASE
+            valueFrom:
+              secretKeyRef:
+                name: aicore-llm
+                key: apibase
+          - name: AICORE_LLM_RESOURCE_GROUP
+            valueFrom:
+              secretKeyRef:
+                name: aicore-llm
+                key: resourcegroup
