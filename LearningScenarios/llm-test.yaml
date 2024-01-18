@@ -1,14 +1,14 @@
 apiVersion: ai.sap.com/v1alpha1
 kind: ServingTemplate
 metadata:
-  name: llm-test-service-i517232 # executable ID, must be unique across your SAP AI Core instance, for example use `server-pipeline-yourname-1234`
+  name: llm-langchain-i517232 # executable ID, must be unique across your SAP AI Core instance, for example use `server-pipeline-yourname-1234`
   annotations:  
-    scenarios.ai.sap.com/description: "llm test"
-    scenarios.ai.sap.com/name: "llm test scenario" # Scenario name should be the use case
+    scenarios.ai.sap.com/description: "llm langchain"
+    scenarios.ai.sap.com/name: "llm langchain scenario" # Scenario name should be the use case
     executables.ai.sap.com/description: "llm service Completions Proxy as Inference"
-    executables.ai.sap.com/name: "llm-test" # Executable name should describe the workflow in the use case
+    executables.ai.sap.com/name: "llm-langchain-test" # Executable name should describe the workflow in the use case
   labels:
-    scenarios.ai.sap.com/id: "llm-test-scenario"
+    scenarios.ai.sap.com/id: "llm-langchain-scenario"
     ai.sap.com/version: "1.0"
     ext.ai.sap.com/islm_released_version: "true"
     ext.ai.sap.com/islm_executable_type: "inference"
