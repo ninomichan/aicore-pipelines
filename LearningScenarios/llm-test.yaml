@@ -31,7 +31,7 @@ spec:
         maxReplicas: 1    # how much to scale
         containers:
         - name: kserve-container
-          image: docker.io/vickiwang/monitor-llm:02 
+          image: docker.io/vickiwang/monitor-llm:03
           ports:
             - containerPort: 9001    # customizable port
               protocol: TCP
