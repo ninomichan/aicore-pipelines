@@ -65,3 +65,23 @@ spec:
               secretKeyRef:
                 name: aicore-llm
                 key: resourcegroup
+          - name: BTP_LLM_AUTH_URL
+            valueFrom:
+              secretKeyRef:
+                name: azure-proxy-key
+                key: auth_url
+          - name: BTP_LLM_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: azure-proxy-key
+                key: client_id
+          - name: BTP_LLM_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: azure-proxy-key
+                key: client_secret
+          - name: BTP_LLM_API_BASE
+            valueFrom:
+              secretKeyRef:
+                name: azure-proxy-key
+                key: proxy_url
