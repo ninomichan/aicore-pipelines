@@ -43,26 +43,26 @@ spec:
           - name: AICORE_AUTH_URL
             valueFrom:
               secretKeyRef:
-                name: aicore-llm
+                name: aicore-proxy
                 key: authurl
           - name: AICORE_CLIENT_ID
             valueFrom:
               secretKeyRef:
-                name: aicore-llm
+                name: aicore-proxy
                 key: clientid
           - name: AICORE_CLIENT_SECRET
             valueFrom:
               secretKeyRef:
-                name: aicore-llm
+                name: aicore-proxy
                 key: clientsecret
           - name: AICORE_BASE_URL
             valueFrom:
               secretKeyRef:
-                name: aicore-llm
+                name: aicore-proxy
                 key: apibase
           - name: AICORE_RESOURCE_GROUP
             valueFrom:
               secretKeyRef:
-                name: aicore-llm
+                name: aicore-proxy
                 key: resourcegroup
 
